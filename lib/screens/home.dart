@@ -1,4 +1,5 @@
 import 'package:IntegrarNuevaAPI/models/currencies.model.dart';
+import 'package:IntegrarNuevaAPI/models/motherClassRegion.model.dart';
 import 'package:IntegrarNuevaAPI/models/region.model.dart';
 import 'package:flutter/material.dart';
 import '../api/restcountries.api.dart';
@@ -13,13 +14,21 @@ class Home extends StatelessWidget {
         alignment: Alignment.center,
         child: FutureBuilder(
           future: _api.getRegions(),
-          builder: (contexto, AsyncSnapshot<Region> snapshot) {
+          builder: (contexto, AsyncSnapshot<MotherClassRegion> snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.active:
-                break;
               case ConnectionState.done:
-                return Text(
-                    "Elementos devueltos ${snapshot.data.currencies.length}");
+                return ListView(
+                  scrollDirection: Axis.vertical,
+                  padding: EdgeInsets.all(8),
+                  children: snapshot.data.region.map<Widget>((region) {
+                    return Container(
+                      height: 50,
+                      color: Colors.amber[600],
+                      child: Center(child: Text(region.name)),
+                    );
+                  }).toList(),
+                );
                 break;
               default:
                 return CircularProgressIndicator();
@@ -31,3 +40,4 @@ class Home extends StatelessWidget {
     );
   }
 }
+//return Text(region.name

@@ -18,6 +18,12 @@ class Region {
     region = parsed['region'];
     population = parsed['population'];
 
+    /*  if (parsed['currencies'] != null) {
+      currencies = parsed['currencies'].map<Currencies>((result) {
+        return Currencies.fromJson(result);
+      }).toList();
+    }
+*/
     if (parsed['currencies'] != null) {
       currencies = parsed['currencies'].map<Currencies>((result) {
         return Currencies.fromJson(result);
